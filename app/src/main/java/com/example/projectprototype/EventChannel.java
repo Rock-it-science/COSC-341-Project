@@ -49,14 +49,14 @@ public class EventChannel {
     	return users;
     }
 
+    public Guild getGuild(){return server; }
+
     public void setRole(Member member, Role role)
     {
     	server.addRoleToMember(member, role);
     }
-
-    public Guild getGuild(){return server; }
-
-   /* public void playAudio(String name)
+/*
+    public void playAudio(String name)
     {
         AudioManager manager = server.getAudioManager();
         manager.setSendingHandler(new AudioPlayerSendHandler<>());
