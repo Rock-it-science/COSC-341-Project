@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment {
 
 
     String token;
+    String songName;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -69,6 +70,12 @@ public class HomeFragment extends Fragment {
         });
     }
 
+
+
+    void updatePlaying(String songName)
+    {
+        this.songName = songName;
+    }
 
 
 
