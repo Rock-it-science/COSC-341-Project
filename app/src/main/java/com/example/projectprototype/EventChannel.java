@@ -69,36 +69,45 @@ public class EventChannel {
     	server.addRoleToMember(member, role);
     }
 
-    public void setMusicChannel(VoiceChannel chan)
+    public void deafen(Member member)
     {
-        if(musicPlayer == null)
-        {
-            musicPlayer = new musicMain(server);
-        }
 
-        musicPlayer.setChan(chan);
 
     }
 
-    public void addSong(String song)
-    {
-        musicPlayer.playMusic(song);
-    }
 
-    public void skipSong()
-    {
-        musicPlayer.skipMusic();
-    }
+    //MUSIC COMMANDS
 
-    public String getPlaying()
-    {
-        return musicPlayer.getPlaying();
-    }
+            public void setMusicChannel(VoiceChannel chan)
+            {
+                if(musicPlayer == null)
+                {
+                    musicPlayer = new musicMain(server);
+                }
 
-    public void createMusicConnection(String name)
-    {
-        musicPlayer = new musicMain(server);
-    }
+                musicPlayer.setChan(chan);
+
+            }
+
+            public void addSong(String song)
+            {
+                musicPlayer.playMusic(song);
+            }
+
+            public void skipSong()
+            {
+                musicPlayer.skipMusic();
+            }
+
+            public String getPlaying()
+            {
+                return musicPlayer.getPlaying();
+            }
+
+            public void createMusicConnection(String name)
+            {
+                musicPlayer = new musicMain(server);
+            }
 }
 
 
