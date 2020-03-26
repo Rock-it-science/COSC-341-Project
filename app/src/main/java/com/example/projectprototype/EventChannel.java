@@ -1,6 +1,8 @@
 package com.example.projectprototype;
 
 
+import android.speech.tts.Voice;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -14,6 +16,8 @@ import java.util.List;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
+
+import com.example.projectprototype.music.musicMain;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
 import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
@@ -24,6 +28,7 @@ public class EventChannel {
     private List users;
     private List roles;
     private Guild server;
+    private musicMain musicPlayer = null;
 
     public EventChannel(JDA api) {
         this.api = api;
@@ -49,20 +54,52 @@ public class EventChannel {
     	return users;
     }
 
-    public Guild getGuild(){return server; }
+    public Guild getGuild()
+    {
+        return server;
+    }
+
+    public List getVoice()
+    {
+        return server.getVoiceChannels();
+    }
 
     public void setRole(Member member, Role role)
     {
     	server.addRoleToMember(member, role);
     }
-/*
-    public void playAudio(String name)
-    {
-        AudioManager manager = server.getAudioManager();
-        manager.setSendingHandler(new AudioPlayerSendHandler<>());
-        manager.openAudioConnection(server.getVoiceChannelsByName(name, true).get(0));
 
-    }*/
+    public void setMusicChannel(VoiceChannel chan)
+    {
+        if(musicPlayer == null)
+        {
+            musicPlayer = new musicMain(server);
+        }
+
+        musicPlayer.setChan(chan);
+
+    }
+
+    public void addSong(String song)
+    {
+        musicPlayer.playMusic(song);
+    }
+
+    public void skipSong()
+    {
+        musicPlayer.skipMusic();
+    }
+
+    public String getPlaying()
+    {
+        return musicPlayer.getPlaying();
+    }
+
+    public void createMusicConnection(String name)
+    {
+        musicPlayer = new musicMain(server);
+    }
 }
+
 
 
