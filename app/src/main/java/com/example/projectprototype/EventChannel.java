@@ -38,6 +38,16 @@ public class EventChannel {
         generalChannel.sendMessage(msg).queue();
     }
 
+    public void testReactions(String msg)
+    {
+        TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
+        generalChannel.sendMessage(msg).queue(message -> {
+            message.addReaction(":muscle:").queue();
+            message.addReaction(":japanese_goblin:").queue();
+            message.addReaction(":fried_shrimp:").queue();
+        });
+    }
+
 
     public List getRoles()
     {
@@ -49,7 +59,7 @@ public class EventChannel {
     	return users;
     }
 
-    public Guild getGuild(){return server; }
+    public Guild getGuild(){ return server; }
 
     public void setRole(Member member, Role role)
     {
