@@ -92,10 +92,22 @@ public class EventChannel {
     	server.addRoleToMember(member, role);
     }
 
-    public void deafen(Member member)
+    public void ban(Member member, String reason)
     {
+        member.ban(0, reason);
+    }
+    public void ban(Member member)
+    {
+        member.ban(0);
+    }
 
-
+    public void kick(Member member)
+    {
+        member.kick();
+    }
+    public void kick(Member member, String reason)
+    {
+        member.kick(reason);
     }
 
 
