@@ -2,6 +2,7 @@ package com.example.projectprototype;
 
 
 import android.speech.tts.Voice;
+import android.util.Log;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
@@ -43,6 +44,27 @@ public class EventChannel {
         generalChannel.sendMessage(msg).queue();
     }
 
+    public void inThePoolWithTheBoys(String msg)
+    {
+        TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
+        generalChannel.sendMessage(msg).queue(message -> {
+            message.addReaction("0️⃣").queue();
+            message.addReaction("1️⃣").queue();
+            message.addReaction("2️⃣").queue();
+            message.addReaction("3️⃣").queue();
+            message.addReaction("4️⃣").queue();
+        });
+    }
+
+    public void poolYesNo(String msg)
+    {
+        TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
+        generalChannel.sendMessage(msg).queue(message -> {
+            message.addReaction("✅").queue();
+            message.addReaction("❌").queue();
+        });
+    }
+
 
     public List getRoles()
     {
@@ -53,6 +75,7 @@ public class EventChannel {
     {
     	return users;
     }
+
 
     public Guild getGuild()
     {
