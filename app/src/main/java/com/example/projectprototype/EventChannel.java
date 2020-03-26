@@ -1,11 +1,22 @@
 package com.example.projectprototype;
 
+
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
+
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
 import java.util.List;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.managers.AudioManager;
+import net.dv8tion.jda.api.audio.AudioSendHandler;
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
+import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
 
 
 public class EventChannel {
@@ -43,6 +54,15 @@ public class EventChannel {
     	server.addRoleToMember(member, role);
     }
 
+    public Guild getGuild(){return server; }
 
+   /* public void playAudio(String name)
+    {
+        AudioManager manager = server.getAudioManager();
+        manager.setSendingHandler(new AudioPlayerSendHandler<>());
+        manager.openAudioConnection(server.getVoiceChannelsByName(name, true).get(0));
 
+    }*/
 }
+
+
