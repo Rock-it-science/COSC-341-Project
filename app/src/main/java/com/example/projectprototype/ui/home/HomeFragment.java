@@ -30,10 +30,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,7 +70,7 @@ public class HomeFragment extends Fragment {
     String songNameText = " - ";
     Spinner spinner;
     String[] channels;
-    EventChannel eve;
+    EventChannel eventChannel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -77,47 +79,32 @@ public class HomeFragment extends Fragment {
         token = getLastToken();
 
 
+        //Spinner
         try {
             JDA api = JDABuilder.createDefault(token).build();
             Thread.sleep(1000);
-            eve = new EventChannel(api);
+            eventChannel = new EventChannel(api);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        channels = eve.getVoice();
-
-
-        //Spinner   (broken)
-        /*
-        try {
-            JDABuilder.createDefault(token).addEventListeners(new ListenerAdapter() {
-                @Override public void onReady(ReadyEvent event) {
-                    try {
-                        eve = new EventChannel(JDABuilder.createDefault(token).build().awaitReady());
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (LoginException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            ).build();
-        } catch (LoginException e) {
-            e.printStackTrace();
-        }
-
-         */
-
-        //System.out.println(channels[0]);   // Should print a channel name but just crashes despite this being initialized.
-
-        /*
+        channels = eventChannel.getVoice();
         Spinner spinner = v.findViewById(R.id.spinnerChannels);
         ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, channels);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         spinner.setAdapter(adapter);
-        */
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                eventChannel.setMusicChannel(channels[position]);   //  Crashes here
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+
+
         return v;
     }
 
@@ -149,8 +136,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-
     }
 
     //  adds song to queue
