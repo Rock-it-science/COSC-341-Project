@@ -110,7 +110,7 @@ public class EventChannel {
         member.kick(reason);
     }
 
-
+    
     //MUSIC COMMANDS
 
             public void setMusicChannel(VoiceChannel chan)
