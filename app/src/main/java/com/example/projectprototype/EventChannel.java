@@ -1,32 +1,15 @@
 package com.example.projectprototype;
-
-
-import android.speech.tts.Voice;
-import android.util.Log;
-
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.JDABuilder;
-
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.managers.AudioManager;
-import net.dv8tion.jda.api.audio.AudioSendHandler;
-
 import net.dv8tion.jda.api.requests.restaction.pagination.ReactionPaginationAction;
 import com.example.projectprototype.music.musicMain;
-
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
-import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
 
 
 public class EventChannel {
@@ -168,7 +151,24 @@ public class EventChannel {
         member.kick(reason);
     }
 
-    
+    public String[] getText()
+    {
+        List chan = server.getTextChannels();
+        String[] output = new String[chan.size()];
+        for(int i = 0 ; i < chan.size() ; i++)
+        {
+            output[i] = ((TextChannel)chan.get(i)).getName();
+        }
+        return output;
+    }
+
+    public void writeToText(String message, String name)
+    {
+        TextChannel chan = server.getTextChannelsByName(name, true).get(0);
+        chan.sendMessage(message);
+    }
+
+
     //MUSIC COMMANDS
 
             public void setMusicChannel(String name)
@@ -200,6 +200,7 @@ public class EventChannel {
             {
                 musicPlayer = new musicMain(server);
             }
+
 }
 
 
