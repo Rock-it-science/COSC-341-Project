@@ -28,6 +28,8 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
 import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
 
+import org.w3c.dom.Text;
+
 
 public class EventChannel {
     private final JDA api;
@@ -168,7 +170,24 @@ public class EventChannel {
         member.kick(reason);
     }
 
-    
+    public String[] getText()
+    {
+        List chan = server.getTextChannels();
+        String[] output = new String[chan.size()];
+        for(int i = 0 ; i < chan.size() ; i++)
+        {
+            output[i] = ((TextChannel)chan.get(i)).getName();
+        }
+        return output;
+    }
+
+    public void writeToText(String message, String name)
+    {
+        TextChannel chan = server.getTextChannelsByName(name, true).get(0);
+        chan.sendMessage(message);
+    }
+
+
     //MUSIC COMMANDS
 
             public void setMusicChannel(String name)
@@ -202,6 +221,7 @@ public class EventChannel {
             {
                 musicPlayer = new musicMain(server);
             }
+
 }
 
 
