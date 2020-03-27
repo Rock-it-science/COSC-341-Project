@@ -135,11 +135,11 @@ public class EventChannel {
 
     public String[] getVoice()
     {
+
         List<VoiceChannel> voices = server.getVoiceChannels();
         String[] output = new String[voices.size()];
         for(int i = 0; i < voices.size() ; i++)
         {
-            System.out.println(voices.get(i).getName());
             output[i] = voices.get(i).getName();
         }
         return output;

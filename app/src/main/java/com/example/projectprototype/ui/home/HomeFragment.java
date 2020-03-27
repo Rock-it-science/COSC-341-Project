@@ -68,6 +68,7 @@ public class HomeFragment extends Fragment {
     String songNameText = " - ";
     Spinner spinner;
     String[] channels;
+    EventChannel eve;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -76,12 +77,25 @@ public class HomeFragment extends Fragment {
         token = getLastToken();
 
 
+        try {
+            JDA api = JDABuilder.createDefault(token).build();
+            Thread.sleep(1000);
+            eve = new EventChannel(api);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        channels = eve.getVoice();
+
+
         //Spinner   (broken)
+        /*
         try {
             JDABuilder.createDefault(token).addEventListeners(new ListenerAdapter() {
                 @Override public void onReady(ReadyEvent event) {
                     try {
-                        channels = new EventChannel(JDABuilder.createDefault(token).build().awaitReady()).getVoice();
+                        eve = new EventChannel(JDABuilder.createDefault(token).build().awaitReady());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (LoginException e) {
@@ -93,6 +107,8 @@ public class HomeFragment extends Fragment {
         } catch (LoginException e) {
             e.printStackTrace();
         }
+
+         */
 
         //System.out.println(channels[0]);   // Should print a channel name but just crashes despite this being initialized.
 
