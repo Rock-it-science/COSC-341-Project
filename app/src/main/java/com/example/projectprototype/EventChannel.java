@@ -112,10 +112,14 @@ public class EventChannel {
         return null;
     }
 
-    public List getRoles()
+    public String[] getRoles()
     {
-    	return roles;
-
+    	String[] output = new String[roles.size()];
+    	for(int i = 0; i < roles.size() ; i++)
+        {
+            output[i] = ((Role)roles.get(i)).getName();
+        }
+        return output;
     }
 
     public List getMembers()
@@ -140,9 +144,9 @@ public class EventChannel {
         return output;
     }
 
-    public void setRole(Member member, Role role)
+    public void setRole(Member member, String role)
     {
-    	server.addRoleToMember(member, role);
+    	server.addRoleToMember(member, server.getRolesByName(role, true).get(0));
     }
 
     public void ban(Member member, String reason)
