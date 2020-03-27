@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.JDABuilder;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
@@ -114,6 +115,7 @@ public class EventChannel {
     public List getRoles()
     {
     	return roles;
+
     }
 
     public List getMembers()
@@ -127,9 +129,15 @@ public class EventChannel {
         return server;
     }
 
-    public List getVoice()
+    public String[] getVoice()
     {
-        return server.getVoiceChannels();
+        List<VoiceChannel> voices = server.getVoiceChannels();
+        String[] output = new String[voices.size()];
+        for(int i = 0; i < voices.size() ; i++)
+        {
+            output[i] = voices.get(i).getName();
+        }
+        return output;
     }
 
     public void setRole(Member member, Role role)
@@ -158,14 +166,15 @@ public class EventChannel {
     
     //MUSIC COMMANDS
 
-            public void setMusicChannel(VoiceChannel chan)
+            public void setMusicChannel(String name)
             {
+                VoiceChannel channel = server.getVoiceChannelsByName(name, true).get(0);
                 if(musicPlayer == null)
                 {
                     musicPlayer = new musicMain(server);
                 }
 
-                musicPlayer.setChan(chan);
+                musicPlayer.setChan(channel);
 
             }
 
