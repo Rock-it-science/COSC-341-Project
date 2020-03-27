@@ -1,34 +1,15 @@
 package com.example.projectprototype;
-
-
-import android.speech.tts.Voice;
-import android.util.Log;
-
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.JDABuilder;
-
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.managers.AudioManager;
-import net.dv8tion.jda.api.audio.AudioSendHandler;
-
 import net.dv8tion.jda.api.requests.restaction.pagination.ReactionPaginationAction;
 import com.example.projectprototype.music.musicMain;
-
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
-import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
-
-import org.w3c.dom.Text;
 
 
 public class EventChannel {
