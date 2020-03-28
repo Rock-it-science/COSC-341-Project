@@ -8,10 +8,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Music</string>
-    <string name="menu_gallery">Roles</string>
-    <string name="menu_slideshow">Kick/Ban</string>
-    <string name="menu_pool">Pool</string>
+    <string name="menu_home">Play Music</string>
+    <string name="menu_gallery">Role Management</string>
+    <string name="menu_slideshow">Kick/Ban Users</string>
+    <string name="menu_pool">Create Poll</string>
 
     <string name="home_second">Home Second</string>
 

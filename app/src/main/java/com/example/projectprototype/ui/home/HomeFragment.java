@@ -1,31 +1,5 @@
 package com.example.projectprototype.ui.home;
 
-import android.speech.tts.Voice;
-import android.util.Log;
-
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.audio.AudioSendHandler;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Role;
-
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
-import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.managers.AudioManager;
-import net.dv8tion.jda.api.audio.AudioSendHandler;
-
-import net.dv8tion.jda.api.requests.restaction.pagination.ReactionPaginationAction;
-import com.example.projectprototype.music.musicMain;
-
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
-import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,6 +60,7 @@ public class HomeFragment extends Fragment {
 
 
         //Spinner
+        /*
         try {
             JDA api = JDABuilder.createDefault(token).build();
             Thread.sleep(1000);
@@ -109,7 +84,7 @@ public class HomeFragment extends Fragment {
                 // your code here
             }
         });
-
+        */
 
         return v;
     }
