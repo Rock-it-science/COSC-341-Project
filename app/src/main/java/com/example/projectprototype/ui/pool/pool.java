@@ -112,7 +112,6 @@ public class pool extends Fragment
                         o4.getText().toString() + " ," +
                         o5.getText().toString() + " ");
 
-                showResults();
             }
             else
             {

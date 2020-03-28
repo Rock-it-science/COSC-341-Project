@@ -43,6 +43,7 @@ public class EventChannel {
         TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
         generalChannel.sendMessage(msg).queue(message -> {
             poolMessage = message;
+            Log.d("POOL", "                                inThePoolWithTheBoys: " + message);
             message.addReaction("1️⃣").queue();
             message.addReaction("2️⃣").queue();
             message.addReaction("3️⃣").queue();
@@ -94,7 +95,7 @@ public class EventChannel {
 
             ReactionPaginationAction users;
 
-            users = poolMessage.retrieveReactionUsers("1️⃣").;
+            users = poolMessage.retrieveReactionUsers("1️⃣");
             list.add(users.cacheSize());
             users = poolMessage.retrieveReactionUsers("2️⃣");
             list.add(users.cacheSize());
@@ -106,6 +107,7 @@ public class EventChannel {
             list.add(users.cacheSize());
 
         }
+
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);list.add(1);list.add(1);list.add(1);list.add(1);
         return list;
