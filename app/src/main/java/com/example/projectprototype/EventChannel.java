@@ -123,14 +123,14 @@ public class EventChannel {
         return output;
     }
 
-    public List getMembers()
+    public String[] getMembers()
     {
         String[] output = new String[users.size()];
         for(int i = 0; i< users.size() ; i++)
         {
             output[i] = (((Member)users.get(i)).getEffectiveName());
         }
-    	return users;
+    	return output;
     }
 
 

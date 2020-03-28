@@ -62,7 +62,6 @@ public class HomeFragment extends Fragment {
 
 
         //Spinner
-
         try {
             JDA api = JDABuilder.createDefault(token).build();
             Thread.sleep(1000);
