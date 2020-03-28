@@ -21,6 +21,7 @@ import com.example.projectprototype.EventChannel;
 import com.example.projectprototype.MainActivity;
 import com.example.projectprototype.R;
 
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -60,7 +61,7 @@ public class HomeFragment extends Fragment {
 
 
         //Spinner
-        /*
+
         try {
             JDA api = JDABuilder.createDefault(token).build();
             Thread.sleep(1000);
@@ -68,6 +69,7 @@ public class HomeFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        /*
         channels = eve.getVoice();
         Spinner spinner = v.findViewById(R.id.spinnerChannels);
         ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, channels);

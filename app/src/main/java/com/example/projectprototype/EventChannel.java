@@ -19,6 +19,7 @@ public class EventChannel {
     private Guild server;
     private Message poolMessage;
     private musicMain musicPlayer = null;
+    private String poolText;
 
 
     public EventChannel(JDA api) {
@@ -45,6 +46,16 @@ public class EventChannel {
             message.addReaction("4️⃣").queue();
             message.addReaction("5️⃣").queue();
         });
+    }
+
+    public String getPoolText()
+    {
+        return poolText;
+    }
+
+    public void setPoolText(String txt)
+    {
+        poolText = txt;
     }
 
     public void poolYesNo(String msg)
