@@ -43,6 +43,11 @@
     <fragment
         android:id="@+id/nav_pool"
         android:name="com.example.projectprototype.ui.pool.pool"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_pool"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_results"
+        android:name="com.example.projectprototype.ui.Results.Results"
+        android:label="@string/menu_results"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>

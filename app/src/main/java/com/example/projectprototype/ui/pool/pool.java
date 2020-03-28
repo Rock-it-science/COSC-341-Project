@@ -64,10 +64,10 @@ public class pool extends Fragment
 
     public void showResults()
     {
-        FragmentTransaction fragmentTransaction = getActivity()
+       /* FragmentTransaction fragmentTransaction = getActivity()
                 .getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.nav_pool, new Results())
-                .commit();
+                .commit();*/
     }
 
     @Override
@@ -104,13 +104,13 @@ public class pool extends Fragment
 
                 e.inThePoolWithTheBoys(msg);
 
-                e.setPoolText(title.getText().toString() + "," +
-                        message.getText().toString() + "," +
-                        o1.getText().toString() + "," +
-                        o2.getText().toString() + "," +
-                        o3.getText().toString() + "," +
-                        o4.getText().toString() + "," +
-                        o5.getText().toString());
+                e.setPoolText(title.getText().toString() + " ," +
+                        message.getText().toString() + " ," +
+                        o1.getText().toString() + " ," +
+                        o2.getText().toString() + " ," +
+                        o3.getText().toString() + " ," +
+                        o4.getText().toString() + " ," +
+                        o5.getText().toString() + " ");
 
                 showResults();
             }

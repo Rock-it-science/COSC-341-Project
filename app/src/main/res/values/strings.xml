@@ -12,6 +12,7 @@
     <string name="menu_gallery">Role Management</string>
     <string name="menu_slideshow">Kick/Ban Users</string>
     <string name="menu_pool">Create Poll</string>
+    <string name="menu_results">Poll Results</string>
 
     <string name="home_second">Home Second</string>
 

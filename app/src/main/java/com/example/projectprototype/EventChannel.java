@@ -1,4 +1,6 @@
 package com.example.projectprototype;
+import android.util.Log;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -27,6 +29,7 @@ public class EventChannel {
         server = api.getGuilds().get(0);
         users = server.getMembers();
         roles = server.getRoles();
+        poolText = "";
     }
 
 
@@ -84,14 +87,18 @@ public class EventChannel {
 
     public ArrayList<Integer> results5()
     {
+
         if(poolMessage != null)
         {
+            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("1️⃣").cacheSize()));
+            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("2️⃣").cacheSize()));
+            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("3️⃣").cacheSize()));
+            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("4️⃣").cacheSize()));
+            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("5️⃣").cacheSize()));
             ArrayList<Integer> list = new ArrayList<>();
 
             ReactionPaginationAction users;
 
-            users = poolMessage.retrieveReactionUsers("0️⃣");
-            list.add(users.cacheSize());
             users = poolMessage.retrieveReactionUsers("1️⃣");
             list.add(users.cacheSize());
             users = poolMessage.retrieveReactionUsers("2️⃣");
@@ -100,10 +107,14 @@ public class EventChannel {
             list.add(users.cacheSize());
             users = poolMessage.retrieveReactionUsers("4️⃣");
             list.add(users.cacheSize());
+            users = poolMessage.retrieveReactionUsers("5️⃣");
+            list.add(users.cacheSize());
 
             //Log.d("Test", "results5: " + list.toString());
         }
-        return null;
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);list.add(1);list.add(1);list.add(1);list.add(1);
+        return list;
     }
 
     public String[] getRoles()

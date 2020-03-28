@@ -48,8 +48,9 @@ public class HomeFragment extends Fragment {
     static EventChannel eve;
 
 
-    public static EventChannel getEvent()
-    {
+    public static EventChannel getEvent(){ //throws Exception {
+        //if(eve == null)
+            //throw new Exception("AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHH eventchannel was not created yet : ");
         return eve;
     }
 
@@ -65,10 +66,14 @@ public class HomeFragment extends Fragment {
         try {
             JDA api = JDABuilder.createDefault(token).build();
             Thread.sleep(1000);
-            eve = new EventChannel(api);
+            if(eve == null)
+                eve = new EventChannel(api);
+            Thread.sleep(1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        eve.setPoolText("");
         /*
         channels = eve.getVoice();
         Spinner spinner = v.findViewById(R.id.spinnerChannels);

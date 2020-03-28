@@ -20,5 +20,9 @@
             android:id="@+id/nav_pool"
             android:icon="@android:drawable/ic_menu_agenda"
             android:title="@string/menu_pool" />
+        <item
+            android:id="@+id/nav_results"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="@string/menu_results" />
     </group>
 </menu>
