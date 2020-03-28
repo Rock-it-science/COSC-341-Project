@@ -178,9 +178,7 @@ public class EventChannel {
                 {
                     musicPlayer = new musicMain(server);
                 }
-
                 musicPlayer.setChan(channel);
-
             }
 
             public void addSong(String song)
