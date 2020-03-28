@@ -68,7 +68,13 @@ public class HomeFragment extends Fragment {
     String songNameText = " - ";
     Spinner spinner;
     String[] channels;
-    EventChannel eve;
+    static EventChannel eve;
+
+
+    public static EventChannel getEvent()
+    {
+        return eve;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -140,7 +146,8 @@ public class HomeFragment extends Fragment {
                     JDABuilder.createDefault(token) //Token goes here
                             //.addEventListeners(listener) // some other listeners/settings
                             .addEventListeners(new ListenerAdapter() {
-                                @Override public void onReady(ReadyEvent event) {
+                                @Override public void onReady(ReadyEvent event)
+                                {
                                     new EventChannel(event.getJDA()).sendGeneral(tv.getText().toString()); // starts your channel with the ready event
                                 }
                             }).build();

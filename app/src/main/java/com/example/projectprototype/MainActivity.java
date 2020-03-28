@@ -37,24 +37,21 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(getLastToken()); //  Set tv to last used token if available.
 
         final Button btn = findViewById(R.id.buttonConnect);
-        btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        btn.setOnClickListener(v -> {
+            if (tv.getText().toString().equals("")       //  Invalid inputs
+                    || tv.getText().toString().length() < 15) {
+                Toast.makeText(getApplicationContext(), "Invalid Input", Toast.LENGTH_SHORT).show();
+            } else {
 
-                if (tv.getText().toString().equals("")       //  Invalid inputs
-                        || tv.getText().toString().length() < 15) {
-                    Toast.makeText(getApplicationContext(), "Invalid Input", Toast.LENGTH_SHORT).show();
-                } else {
-
-                    //  Save token to local file
-                    if (updateTokens(tv.getText().toString()) == 0) {
-                        Toast.makeText(getApplicationContext(), "Token Saved", Toast.LENGTH_SHORT).show();
-                        // Save token to XML (or any other way to save locally)
-                    }
-                    //  Move on to MainNav activity
-                    Intent myIntent = new Intent(MainActivity.this, MainNav.class);
-                    startActivity(myIntent);
-
+                //  Save token to local file
+                if (updateTokens(tv.getText().toString()) == 0) {
+                    Toast.makeText(getApplicationContext(), "Token Saved", Toast.LENGTH_SHORT).show();
+                    // Save token to XML (or any other way to save locally)
                 }
+                //  Move on to MainNav activity
+                Intent myIntent = new Intent(MainActivity.this, MainNav.class);
+                startActivity(myIntent);
+
             }
         });
     }

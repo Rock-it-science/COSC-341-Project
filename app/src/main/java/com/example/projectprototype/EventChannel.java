@@ -39,11 +39,11 @@ public class EventChannel {
         TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
         generalChannel.sendMessage(msg).queue(message -> {
             poolMessage = message;
-            message.addReaction("0️⃣").queue();
             message.addReaction("1️⃣").queue();
             message.addReaction("2️⃣").queue();
             message.addReaction("3️⃣").queue();
             message.addReaction("4️⃣").queue();
+            message.addReaction("5️⃣").queue();
         });
     }
 
@@ -71,7 +71,7 @@ public class EventChannel {
         return null;
     }
 
-    public ArrayList<Integer> results5()
+    public -ArrayList<Integer> results5()
     {
         if(poolMessage != null)
         {

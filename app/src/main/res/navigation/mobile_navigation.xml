@@ -40,4 +40,9 @@
         android:name="com.example.projectprototype.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_pool"
+        android:name="com.example.projectprototype.ui.pool.pool"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
 </navigation>
