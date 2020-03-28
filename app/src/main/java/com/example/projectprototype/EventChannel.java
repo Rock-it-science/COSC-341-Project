@@ -71,7 +71,7 @@ public class EventChannel {
         return null;
     }
 
-    public -ArrayList<Integer> results5()
+    public ArrayList<Integer> results5()
     {
         if(poolMessage != null)
         {

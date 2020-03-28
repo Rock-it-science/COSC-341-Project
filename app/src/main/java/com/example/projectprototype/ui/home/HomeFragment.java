@@ -89,11 +89,11 @@ public class HomeFragment extends Fragment {
         try {
             JDA api = JDABuilder.createDefault(token).build();
             Thread.sleep(1000);
-            eventChannel = new EventChannel(api);
+            eve = new EventChannel(api);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        channels = eventChannel.getVoice();
+        channels = eve.getVoice();
         Spinner spinner = v.findViewById(R.id.spinnerChannels);
         ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, channels);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                eventChannel.setMusicChannel(channels[position]);   //  Crashes here
+                eve.setMusicChannel(channels[position]);   //  Crashes here
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
