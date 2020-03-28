@@ -129,6 +129,11 @@ public class EventChannel {
 
     public List getMembers()
     {
+        String[] output = new String[users.size()];
+        for(int i = 0; i< users.size() ; i++)
+        {
+            output[i] = (((Member)users.get(i)).getEffectiveName());
+        }
     	return users;
     }
 
