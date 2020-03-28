@@ -59,14 +59,9 @@ public class Results extends Fragment {
         View root  = inflater.inflate(R.layout.results_fragment, container, false);
         e = HomeFragment.getEvent();
 
-        if(e == null)
-        {
-            Log.d("test", "     onCreateView: " + e);
-        }
+        if(e == null){}
         else if(e.getPoolText().length() > 0)
         {
-            Log.d("AHHHHHHHHHHHHHHHH        ", "onCreateView: " + e.getPoolText());
-
             t = new TextView[7];
             t[0] = root.findViewById(R.id.textView13);
             t[1] = root.findViewById(R.id.textView16);

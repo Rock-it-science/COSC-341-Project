@@ -90,16 +90,11 @@ public class EventChannel {
 
         if(poolMessage != null)
         {
-            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("1️⃣").cacheSize()));
-            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("2️⃣").cacheSize()));
-            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("3️⃣").cacheSize()));
-            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("4️⃣").cacheSize()));
-            Log.d("                AHHHHHHHHHHHHHHHHHHHHHHH       ", String.valueOf(poolMessage.retrieveReactionUsers("5️⃣").cacheSize()));
             ArrayList<Integer> list = new ArrayList<>();
 
             ReactionPaginationAction users;
 
-            users = poolMessage.retrieveReactionUsers("1️⃣");
+            users = poolMessage.retrieveReactionUsers("1️⃣").;
             list.add(users.cacheSize());
             users = poolMessage.retrieveReactionUsers("2️⃣");
             list.add(users.cacheSize());
@@ -110,7 +105,6 @@ public class EventChannel {
             users = poolMessage.retrieveReactionUsers("5️⃣");
             list.add(users.cacheSize());
 
-            //Log.d("Test", "results5: " + list.toString());
         }
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);list.add(1);list.add(1);list.add(1);list.add(1);
