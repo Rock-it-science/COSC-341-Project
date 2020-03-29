@@ -66,12 +66,6 @@ public class SlideshowFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         spinner.setAdapter(adapter);
 
-
-        //ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, users);    //  users isnt null but this thinks it is...
-        //adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        //spinner.setAdapter(adapter);
-
-        /*
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -82,7 +76,7 @@ public class SlideshowFragment extends Fragment {
                 // your code here
             }
         });
-        */
+
 
         return root;
     }
