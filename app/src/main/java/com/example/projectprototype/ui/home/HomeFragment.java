@@ -66,12 +66,12 @@ public class HomeFragment extends Fragment {
             Thread.sleep(1000);
             if(eve == null)
                 eve = new EventChannel(api);
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         eve.setupServer();
-        System.out.println(("AAAAAAAAAAAAAAAAAAAAAAAAAAAA" + (eve.getMembers().toString())));
 
 
         eve.setPoolText("");

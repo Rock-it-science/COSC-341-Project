@@ -4,6 +4,7 @@ import android.util.Log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Category;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Guild;
@@ -37,25 +38,29 @@ public class EventChannel {
         poolText = "";
 
         textChans = server.getTextChannels();
+
         for(int i = 0 ; i < textChans.size() ; i++)
         {
-            if(((TextChannel)textChans.get(i)).getName() == "Roles")
+            if(textChans.get(i).getName().equals("roles"))
             {
-                List<Member> member = ((TextChannel) textChans.get(i)).getMembers();
-                for(int j = 0 ; j < member.size() ; j++)
+                MessageHistory h = textChans.get(i).getHistory();
+                List<Message> mess = h.retrievePast(100).complete();
+
+                for(int j = 0 ; j < mess.size() ; j++)
                 {
-                    if(users.contains(member.get(i)))
+                    if(!users.contains(mess.get(j).getAuthor()))
                     {
-                        setRole(member.get(i), "member");
+                        //setRole(mess.get(j).getMember(), "member");
                     }
                 }
                 break;
             }
         }
-
+        System.out.println(server.getMembers().stream().filter(member -> !member.getUser().isBot()).count());
     }
 
     public void setupServer() {
+
         boolean has = false;
         for (TextChannel i : textChans) {
             if (i.getName().equals("roles")) {
@@ -64,21 +69,22 @@ public class EventChannel {
             }
         }
         if (!has)
-            server.createTextChannel("Roles").setParent(textChans.get(0).getParent()).complete();
+            server.createTextChannel("roles").setParent(textChans.get(0).getParent()).complete();
 
         has = false;
-
+        System.out.println(users.toString());
+        System.out.println(roles.toString());
         for (Role i : roles) {
-            if (i.getName().equals("member")) ;
+            if (i.getName().equals("member"))
             {
                 has = true;
                 break;
             }
         }
-
         if (!has)
             server.createRole().setName("member").complete();
     }
+
     public void setMessage(Message message)
     {
         poolMessage = message;
@@ -207,7 +213,7 @@ public class EventChannel {
 
     public void setRole(Member member, String role)
     {
-    	server.addRoleToMember(member, server.getRolesByName(role, true).get(0));
+    	server.addRoleToMember(member, server.getRolesByName(role, true).get(0)).queue();
     }
 
     public void ban(Member member, String reason)
