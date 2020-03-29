@@ -232,22 +232,22 @@ public class EventChannel {
     	server.addRoleToMember(server.getMembersByEffectiveName(member, false).get(0), server.getRolesByName(role, true).get(0)).queue();
     }
 
-    public void ban(Member member, String reason)
+    public void ban(String member, String reason)
     {
-        member.ban(0, reason);
+        server.getMemberById(member).ban(0, reason);
     }
-    public void ban(Member member)
+    public void ban(String member)
     {
-        member.ban(0);
+        server.getMemberById(member).ban(0);
     }
 
-    public void kick(Member member)
+    public void kick(String member)
     {
-        member.kick();
+        server.getMemberById(member).kick();
     }
-    public void kick(Member member, String reason)
+    public void kick(String member, String reason)
     {
-        member.kick(reason);
+        server.getMemberById(member).kick(reason);
     }
 
     public String[] getUserRoles(String user)
