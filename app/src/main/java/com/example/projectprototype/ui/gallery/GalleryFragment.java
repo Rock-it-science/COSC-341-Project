@@ -45,7 +45,7 @@ public class GalleryFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment.getEvent().setRole(sp1.getSelectedItem().toString(), sp2.getSelectedItem().toString());
+                HomeFragment.getEvent().setRole(sp2.getSelectedItem().toString(), sp1.getSelectedItem().toString());
             }
         });
 

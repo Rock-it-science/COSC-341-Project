@@ -38,7 +38,10 @@ public class EventChannel {
         poolText = "";
 
         textChans = server.getTextChannels();
+    }
 
+    public void newUsers()
+    {
         for(int i = 0 ; i < textChans.size() ; i++)
         {
             if(textChans.get(i).getName().equals("roles"))
@@ -48,15 +51,18 @@ public class EventChannel {
 
                 for(int j = 0 ; j < mess.size() ; j++)
                 {
+                    System.out.println(users.toString());
                     if(!users.contains(mess.get(j).getAuthor()))
                     {
+                        System.out.println(mess.get(j).getAuthor().getName());
+                        System.out.println("GOT HERE G");
+                        System.out.println(server.addRoleToMember(mess.get(j).getAuthor().getId(), server.getRolesByName("baseRole",true).get(0)).complete());
                         //setRole(mess.get(j).getMember(), "member");
                     }
                 }
                 break;
             }
         }
-        System.out.println(server.getMembers().stream().filter(member -> !member.getUser().isBot()).count());
     }
 
     public void setupServer() {
@@ -75,14 +81,14 @@ public class EventChannel {
         System.out.println(users.toString());
         System.out.println(roles.toString());
         for (Role i : roles) {
-            if (i.getName().equals("member"))
+            if (i.getName().equals("baseRole"))
             {
                 has = true;
                 break;
             }
         }
         if (!has)
-            server.createRole().setName("member").complete();
+            server.createRole().setName("baseRole").complete();
     }
 
     public void setMessage(Message message)
@@ -213,7 +219,8 @@ public class EventChannel {
 
     public void setRole(String member, String role)
     {
-    	server.addRoleToMember(server.getMembersByName(member, false).get(0), server.getRolesByName(role, true).get(0)).queue();
+        System.out.println(member + " =========== " + server.getMembersByEffectiveName(member, false).toString());
+    	server.addRoleToMember(server.getMembersByEffectiveName(member, false).get(0), server.getRolesByName(role, true).get(0)).queue();
     }
 
     public void ban(Member member, String reason)

@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment {
         }
 
         eve.setupServer();
+        eve.newUsers();
 
 
         eve.setPoolText("");
