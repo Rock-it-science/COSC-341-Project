@@ -74,8 +74,33 @@ public class HomeFragment extends Fragment {
 
         eve.setPoolText("");
 
-        //Guild[] server = ((List<Guild>)eve.getServers()).toArray(Guild[] );
 
+
+        /*
+        List<Guild> server = (eve.getServers());
+        String[] ser = new String[server.size()];
+        for(int i = 0 ; i < server.size() ; i++)
+            ser[i] = server.get(i).toString();
+
+
+        eve.setServer(ser[0]);
+
+
+
+
+        Spinner sp = (Spinner)v.findViewById(R.id.spinnerChannels);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, server);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        sp.setAdapter(adapter);
+
+        sp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                eve.setServer(parent.getSelectedItem().toString());
+            }
+        });
+
+         */
 
 
         /*

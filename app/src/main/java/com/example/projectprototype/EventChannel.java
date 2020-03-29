@@ -29,15 +29,19 @@ public class EventChannel {
     public EventChannel(JDA api) {
         this.api = api;
         servers = api.getGuilds();
+        poolText = "";
+        server = api.getGuilds().get(0);
         users = server.getMembers();
         roles = server.getRoles();
-        poolText = "";
         textChans = server.getTextChannels();
     }
 
     public void setServer(String serString)
     {
         server = api.getGuildsByName(serString, true).get(0);
+        users = server.getMembers();
+        roles = server.getRoles();
+        textChans = server.getTextChannels();
     }
 
     public List<Guild> getServers()
