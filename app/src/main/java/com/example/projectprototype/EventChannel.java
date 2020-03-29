@@ -1,8 +1,6 @@
 package com.example.projectprototype;
-import android.util.Log;
 
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Category;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -13,11 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.requests.restaction.pagination.ReactionPaginationAction;
-import net.dv8tion.jda.internal.requests.Route;
 
 import com.example.projectprototype.music.musicMain;
-
-import org.w3c.dom.Text;
 
 
 public class EventChannel {
@@ -29,15 +24,25 @@ public class EventChannel {
     private musicMain musicPlayer = null;
     private String poolText;
     private List<TextChannel> textChans;
+    private List<Guild> servers;
 
     public EventChannel(JDA api) {
         this.api = api;
-        server = api.getGuilds().get(0);
+        servers = api.getGuilds();
         users = server.getMembers();
         roles = server.getRoles();
         poolText = "";
-
         textChans = server.getTextChannels();
+    }
+
+    public void setServer(String serString)
+    {
+        server = api.getGuildsByName(serString, true).get(0);
+    }
+
+    public List<Guild> getServers()
+    {
+        return servers;
     }
 
     public void newUsers()
@@ -239,6 +244,18 @@ public class EventChannel {
     public void kick(Member member, String reason)
     {
         member.kick(reason);
+    }
+
+    public String[] getUserRoles(String user)
+    {
+        List<Role> ls = server.getMembersByEffectiveName(user,true ).get(0).getRoles();
+        String[] output = new String[ls.size()];
+
+        for(int i = 0 ; i < ls.size() ; i++)
+        {
+            output[i] = ls.get(i).getName();
+        }
+        return output;
     }
 
     public String[] getText()

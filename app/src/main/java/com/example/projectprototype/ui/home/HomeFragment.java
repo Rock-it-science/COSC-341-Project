@@ -23,6 +23,7 @@ import com.example.projectprototype.R;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -71,11 +72,12 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
 
-        eve.setupServer();
-        eve.newUsers();
-
-
         eve.setPoolText("");
+
+        //Guild[] server = ((List<Guild>)eve.getServers()).toArray(Guild[] );
+
+
+
         /*
         channels = eve.getVoice();
         Spinner spinner = v.findViewById(R.id.spinnerChannels);
@@ -103,28 +105,14 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //Views
         songName = getView().findViewById(R.id.textViewCurrent);
-        updatePlaying(songNameText);
-        final TextView tv = getView().findViewById(R.id.tv2);
-        final Button btn = getView().findViewById(R.id.sendMsg2);
+        final Button btn = getView().findViewById(R.id.button3);
 
         token = getLastToken();
 
-        //Button
-        btn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                //Send message that was typed in tv
-                try{
-                    JDABuilder.createDefault(token) //Token goes here
-                            //.addEventListeners(listener) // some other listeners/settings
-                            .addEventListeners(new ListenerAdapter() {
-                                @Override public void onReady(ReadyEvent event)
-                                {
-                                    new EventChannel(event.getJDA()).sendGeneral(tv.getText().toString()); // starts your channel with the ready event
-                                }
-                            }).build();
-                } catch(LoginException e){
-                    e.printStackTrace();
-                }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eve.setupServer();
             }
         });
     }
@@ -134,17 +122,6 @@ public class HomeFragment extends Fragment {
     {
 
     }
-
-
-
-    //  updates the currently playing song
-    void updatePlaying(String songNameTextIn)
-    {
-        songNameText = songNameTextIn;
-        songName.setText(songNameTextIn);
-    }
-
-
 
     //  returns saved token from token.txt
     String getLastToken() {
