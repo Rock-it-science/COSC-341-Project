@@ -19,7 +19,7 @@ public class EventChannel {
     private List users;
     private List roles;
     private Guild server;
-    private Message poolMessage;
+    public Message poolMessage;
     private musicMain musicPlayer = null;
     private String poolText;
 
@@ -32,6 +32,10 @@ public class EventChannel {
         poolText = "";
     }
 
+    public void setMessage(Message message)
+    {
+        poolMessage = message;
+    }
 
     public void sendGeneral(String msg) {
         TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
@@ -42,13 +46,13 @@ public class EventChannel {
     {
         TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
         generalChannel.sendMessage(msg).queue(message -> {
-            poolMessage = message;
-            Log.d("POOL", "                                inThePoolWithTheBoys: " + message);
             message.addReaction("1️⃣").queue();
             message.addReaction("2️⃣").queue();
             message.addReaction("3️⃣").queue();
             message.addReaction("4️⃣").queue();
             message.addReaction("5️⃣").queue();
+
+            setMessage(message);
         });
     }
 
@@ -106,6 +110,7 @@ public class EventChannel {
             users = poolMessage.retrieveReactionUsers("5️⃣");
             list.add(users.cacheSize());
 
+            return list;
         }
 
         ArrayList<Integer> list = new ArrayList<>();
