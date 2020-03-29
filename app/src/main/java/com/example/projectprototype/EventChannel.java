@@ -184,7 +184,7 @@ public class EventChannel {
     public String[] getMembers()
     {
         String[] output = new String[users.size()];
-        System.out.println("THE SIZE OF USERS IS : " + users.size() + "SERVER IS : " + getGuild().getName());
+        System.out.println("THE SIZE OF USERS IS : " + users.size() + " SERVER IS : " + getGuild().getName());
         for(int i = 0; i< users.size() ; i++)
         {
             output[i] = (((Member)users.get(i)).getEffectiveName());
