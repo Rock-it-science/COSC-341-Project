@@ -39,6 +39,7 @@ public class EventChannel {
 
     public void setServer(String serverString)
     {
+
         server = api.getGuildsByName(serverString, true).get(0);
         users = server.getMembers();
         roles = server.getRoles();

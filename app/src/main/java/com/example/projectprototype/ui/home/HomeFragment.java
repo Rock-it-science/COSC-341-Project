@@ -29,6 +29,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import java.io.BufferedReader;
@@ -72,6 +73,7 @@ public class HomeFragment extends Fragment {
 
             try {
 
+                //JDA api = JDABuilder.createDefault("", GatewayIntent.GUILD_MEMBERS).setEnabledCacheFlags(EnumSet.of(MemberCachePolicy.ALL));
                 JDA api = JDABuilder.createDefault(token, GatewayIntent.GUILD_MEMBERS).setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.EMOTE,CacheFlag.CLIENT_STATUS)).build();
                 Thread.sleep(1000);
                 if (eve == null)
@@ -82,7 +84,6 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        eve.setPoolText("");
 
         server = eve.getServers();
         String[] ser = new String[server.size()];
