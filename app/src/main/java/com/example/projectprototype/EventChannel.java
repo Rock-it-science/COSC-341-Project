@@ -24,7 +24,7 @@ public class EventChannel {
     private List<Member> users;
     private List<Role> roles;
     private Guild server;
-    private Message poolMessage;
+    public Message poolMessage;
     private musicMain musicPlayer = null;
     private String poolText;
     private List<TextChannel> textChans;
@@ -55,34 +55,33 @@ public class EventChannel {
 
     }
 
-    public void setupServer()
-    {
+    public void setupServer() {
         boolean has = false;
-        for(TextChannel i : textChans)
-        {
-            if(i.getName().equals("roles"))
-            {
+        for (TextChannel i : textChans) {
+            if (i.getName().equals("roles")) {
                 has = true;
                 break;
             }
         }
-        if(!has)
+        if (!has)
             server.createTextChannel("Roles").setParent(textChans.get(0).getParent()).complete();
 
         has = false;
 
-        for(Role i : roles)
-        {
-            if(i.getName().equals("member"));
+        for (Role i : roles) {
+            if (i.getName().equals("member")) ;
             {
                 has = true;
                 break;
             }
         }
 
-        if(!has)
+        if (!has)
             server.createRole().setName("member").complete();
-
+    }
+    public void setMessage(Message message)
+    {
+        poolMessage = message;
     }
 
     public void sendGeneral(String msg) {
@@ -94,13 +93,13 @@ public class EventChannel {
     {
         TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
         generalChannel.sendMessage(msg).queue(message -> {
-            poolMessage = message;
-            Log.d("POOL", "                                inThePoolWithTheBoys: " + message);
             message.addReaction("1️⃣").queue();
             message.addReaction("2️⃣").queue();
             message.addReaction("3️⃣").queue();
             message.addReaction("4️⃣").queue();
             message.addReaction("5️⃣").queue();
+
+            setMessage(message);
         });
     }
 
@@ -158,6 +157,7 @@ public class EventChannel {
             users = poolMessage.retrieveReactionUsers("5️⃣");
             list.add(users.cacheSize());
 
+            return list;
         }
 
         ArrayList<Integer> list = new ArrayList<>();
