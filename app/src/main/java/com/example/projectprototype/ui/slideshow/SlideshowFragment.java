@@ -43,6 +43,11 @@ import javax.security.auth.login.LoginException;
 public class SlideshowFragment extends Fragment {
     private SlideshowViewModel slideshowViewModel;
 
+    String[] users;         //  Holds all the names of users on the server
+    String[] userRoles;
+    String roles = "";
+    String user;
+
     //  Event Channel
     static EventChannel eve = HomeFragment.getEvent();
     //  Token
@@ -51,10 +56,7 @@ public class SlideshowFragment extends Fragment {
     Button banButton, kickButton;
     TextView userRole;      //  Displays the role of the selected user
     Spinner spinner;        //  Displays all the names of users
-    String[] users;         //  Holds all the names of users on the server
-    String[] userRoles;
-    String roles = "";
-    String user;
+    EditText reasonText;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -97,13 +99,15 @@ public class SlideshowFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        reasonText = view.findViewById(R.id.editText9);
 
         //  Ban Button
         banButton = view.findViewById(R.id.buttonBan);
         banButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //open warning dialogue or simply just ban the user (whatever is easy).
-                //HomeFragment.getEvent().ban(user);
+                if(!reasonText.getText().equals("") || reasonText.getText() != null) HomeFragment.getEvent().ban(user, reasonText.getText().toString());
+                else HomeFragment.getEvent().ban(user);
             }
         });
 
@@ -112,6 +116,8 @@ public class SlideshowFragment extends Fragment {
         banButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //open warning dialogue or simply just kick the user (whatever is easy).
+                if(!reasonText.getText().equals("") || reasonText.getText() != null) HomeFragment.getEvent().kick(user, reasonText.getText().toString());
+                else HomeFragment.getEvent().kick(user);
             }
         });
     }
