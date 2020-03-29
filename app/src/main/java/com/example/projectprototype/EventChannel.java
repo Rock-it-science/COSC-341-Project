@@ -238,20 +238,20 @@ public class EventChannel {
 
     public void ban(String member, String reason)
     {
-        server.getMemberById(member).ban(0, reason);
+        server.getMembersByEffectiveName(member,true).get(0).ban(0, reason);
     }
     public void ban(String member)
     {
-        server.getMemberById(member).ban(0);
+        server.getMembersByEffectiveName(member,true).get(0).ban(0);
     }
 
     public void kick(String member)
     {
-        server.getMemberById(member).kick();
+        server.getMembersByEffectiveName(member,true).get(0).kick();
     }
     public void kick(String member, String reason)
     {
-        server.getMemberById(member).kick(reason);
+        server.getMembersByEffectiveName(member,true).get(0).kick(reason);
     }
 
     public String[] getUserRoles(String user)
