@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.projectprototype.EventChannel;
 import com.example.projectprototype.MainActivity;
 import com.example.projectprototype.R;
+import com.example.projectprototype.ui.home.HomeFragment;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -43,7 +44,7 @@ public class SlideshowFragment extends Fragment {
     private SlideshowViewModel slideshowViewModel;
 
     //  Event Channel
-    static EventChannel eve;
+    static EventChannel eve = HomeFragment.getEvent();
     //  Token
     String token;
     //  Views
@@ -52,28 +53,17 @@ public class SlideshowFragment extends Fragment {
     Spinner spinner;        //  Displays all the names of users
     String[] users;         //  Holds all the names of users on the server
 
-    PopupWindow popUp;
-    boolean click = true;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
         token = getLastToken();
-        /*
-        try {
-            JDA api = JDABuilder.createDefault(token).build();
-            Thread.sleep(1000);
-            eve = new EventChannel(api);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
+        eve = HomeFragment.getEvent();
 
 
         //  Spinner
         /*
         users = eve.getMembers();
-        spinner = v.findViewById(R.id.spinnerChannels);
+        Spinner spinner = root.findViewById(R.id.spinnerChannels);
         ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, users);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         spinner.setAdapter(adapter);
@@ -81,9 +71,7 @@ public class SlideshowFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                //eve.setMusicChannel(channels[position]);   //  Crashes here
 
-                //set userRole to display selected user's role.
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -92,7 +80,6 @@ public class SlideshowFragment extends Fragment {
         });
         */
 
-
         return root;
     }
 
@@ -100,13 +87,11 @@ public class SlideshowFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LinearLayout layout = new LinearLayout(getActivity());
-
         //  Ban Button
         banButton = view.findViewById(R.id.buttonBan);
         banButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                //open warning dialogue.
+                //open warning dialogue or simply just ban the user (whatever is easy).
             }
         });
 
@@ -116,7 +101,7 @@ public class SlideshowFragment extends Fragment {
         banButton = view.findViewById(R.id.buttonBan);
         banButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                //open warning dialogue.
+                //open warning dialogue or simply just kick the user (whatever is easy).
             }
         });
     }
