@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -57,6 +58,7 @@ public class SlideshowFragment extends Fragment {
     TextView userRole;      //  Displays the role of the selected user
     Spinner spinner;        //  Displays all the names of users
     EditText reasonText;
+    CheckBox checkBox;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -88,7 +90,7 @@ public class SlideshowFragment extends Fragment {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+                // do nothing
             }
         });
 
@@ -100,14 +102,20 @@ public class SlideshowFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         reasonText = view.findViewById(R.id.editText9);
+        checkBox = view.findViewById(R.id.checkBox);
 
         //  Ban Button
         banButton = view.findViewById(R.id.buttonBan);
         banButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //open warning dialogue or simply just ban the user (whatever is easy).
-                if(!reasonText.getText().equals("") || reasonText.getText() != null) HomeFragment.getEvent().ban(user, reasonText.getText().toString());
-                else HomeFragment.getEvent().ban(user);
+                if(checkBox.isChecked()) {
+                    if (!reasonText.getText().equals("") || reasonText.getText() != null)
+                        HomeFragment.getEvent().ban(user, reasonText.getText().toString());
+                    else HomeFragment.getEvent().ban(user);
+                }else{
+                    Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -116,8 +124,13 @@ public class SlideshowFragment extends Fragment {
         banButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //open warning dialogue or simply just kick the user (whatever is easy).
-                if(!reasonText.getText().equals("") || reasonText.getText() != null) HomeFragment.getEvent().kick(user, reasonText.getText().toString());
-                else HomeFragment.getEvent().kick(user);
+                if(checkBox.isChecked()) {
+                    if (!reasonText.getText().equals("") || reasonText.getText() != null)
+                        HomeFragment.getEvent().kick(user, reasonText.getText().toString());
+                    else HomeFragment.getEvent().kick(user);
+                }else{
+                    Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
