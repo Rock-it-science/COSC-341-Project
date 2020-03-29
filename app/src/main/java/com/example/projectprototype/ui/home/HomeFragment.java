@@ -1,5 +1,6 @@
 package com.example.projectprototype.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.projectprototype.EventChannel;
 import com.example.projectprototype.MainActivity;
+import com.example.projectprototype.MainNav;
 import com.example.projectprototype.R;
 
 import net.dv8tion.jda.api.JDA;
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment {
     Spinner spinner, sp;
     String[] channels;
     static EventChannel eve;
+    List<Guild> server;
 
 
     public static EventChannel getEvent(){
@@ -62,6 +65,7 @@ public class HomeFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         token = getLastToken();
+
 
         //Spinner
         if(eve == null) {
@@ -80,14 +84,17 @@ public class HomeFragment extends Fragment {
 
         eve.setPoolText("");
 
-
-        List<Guild> server = (eve.getServers());
+        server = eve.getServers();
         String[] ser = new String[server.size()];
         for(int i = 0 ; i < server.size() ; i++)
-            ser[i] = server.get(i).getName();
+        {
+            ser[i] =  server.get(i).getName();
+        }
+
+        System.out.println(ser);
 
         sp = (Spinner)v.findViewById(R.id.spinnerChannels);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, server);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, ser);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp.setAdapter(adapter);
 
@@ -101,7 +108,9 @@ public class HomeFragment extends Fragment {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eve.setServer(sp.getSelectedItem().toString());
+
+                String ser = (sp.getSelectedItem().toString());
+                eve.setServer(ser);
             }
         });
 

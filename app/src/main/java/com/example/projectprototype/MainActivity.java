@@ -50,13 +50,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //  Move on to MainNav activity
                 Intent myIntent = new Intent(MainActivity.this, MainNav.class);
+                myIntent.putExtra("ser", "0");
                 startActivity(myIntent);
 
             }
         });
     }
-
-
 
 
     //  Information on files:

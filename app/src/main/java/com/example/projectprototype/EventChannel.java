@@ -19,7 +19,7 @@ public class EventChannel {
     private final JDA api;
     private List<Member> users;
     private List<Role> roles;
-    private Guild server;
+    private static Guild server = null;
     public Message poolMessage;
     private musicMain musicPlayer = null;
     private String poolText;
@@ -33,16 +33,13 @@ public class EventChannel {
         System.out.println(servers);
         server = servers.get(0);
         users = server.getMembers();
-        System.out.println("MEMBERS ============" + users);
         roles = server.getRoles();
         textChans = server.getTextChannels();
     }
 
-    public void setServer(String serString)
+    public void setServer(String serverString)
     {
-        System.out.println(serString);
-        //System.out.println(api.getGuildsByName(serString, true));
-        //server = api.getGuildsByName(serString, true).get(0);
+        server = api.getGuildsByName(serverString, true).get(0);
         users = server.getMembers();
         roles = server.getRoles();
         textChans = server.getTextChannels();
