@@ -26,18 +26,22 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 import javax.security.auth.login.LoginException;
 
 //  Information on fragments:
 //  https://guides.codepath.com/android/Creating-and-Using-Fragments
+
 public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
 
@@ -49,9 +53,7 @@ public class HomeFragment extends Fragment {
     static EventChannel eve;
 
 
-    public static EventChannel getEvent(){ //throws Exception {
-        //if(eve == null)
-            //throw new Exception("AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHH eventchannel was not created yet : ");
+    public static EventChannel getEvent(){
         return eve;
     }
 
@@ -63,8 +65,10 @@ public class HomeFragment extends Fragment {
 
         //Spinner
         if(eve == null) {
+
             try {
-                JDA api = JDABuilder.createDefault(token).build();
+
+                JDA api = JDABuilder.createDefault(token, GatewayIntent.GUILD_MEMBERS).setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.EMOTE,CacheFlag.CLIENT_STATUS)).build();
                 Thread.sleep(1000);
                 if (eve == null)
                     eve = new EventChannel(api);
@@ -75,8 +79,6 @@ public class HomeFragment extends Fragment {
         }
 
         eve.setPoolText("");
-
-
 
 
         List<Guild> server = (eve.getServers());
@@ -90,34 +92,18 @@ public class HomeFragment extends Fragment {
         sp.setAdapter(adapter);
 
         Button btn2 = (Button) v.findViewById(R.id.button6);
+        ((Button)v.findViewById(R.id.button7)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eve.newUsers();
+            }
+        });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 eve.setServer(sp.getSelectedItem().toString());
             }
         });
-
-
-
-
-        /*
-        channels = eve.getVoice();
-        Spinner spinner = v.findViewById(R.id.spinnerChannels);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, channels);
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                eve.setMusicChannel(channels[position]);   //  Crashes here
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-        });
-        */
 
         return v;
     }

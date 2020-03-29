@@ -30,8 +30,10 @@ public class EventChannel {
         this.api = api;
         servers = api.getGuilds();
         poolText = "";
-        server = api.getGuilds().get(0);
+        System.out.println(servers);
+        server = servers.get(0);
         users = server.getMembers();
+        System.out.println("MEMBERS ============" + users);
         roles = server.getRoles();
         textChans = server.getTextChannels();
     }
