@@ -54,7 +54,13 @@
         android:id="@+id/roleAdd"
         android:layout_width="118dp"
         android:layout_height="56dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="262dp"
+        android:layout_marginBottom="452dp"
         android:text=" Add role "
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="223dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
 </androidx.constraintlayout.widget.ConstraintLayout>

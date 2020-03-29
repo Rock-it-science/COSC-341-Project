@@ -61,13 +61,14 @@ public class SlideshowFragment extends Fragment {
 
 
         //  Spinner
-        /*
         users = eve.getMembers();
         Spinner spinner = root.findViewById(R.id.spinnerChannels);
-        ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, users);
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        spinner.setAdapter(adapter);
+        System.out.println(users[0]);   //   prints pete
+        //ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, users);    //  users isnt null but this thinks it is...
+        //adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        //spinner.setAdapter(adapter);
 
+        /*
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
