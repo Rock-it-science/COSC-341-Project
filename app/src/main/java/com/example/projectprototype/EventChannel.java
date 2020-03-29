@@ -38,7 +38,9 @@ public class EventChannel {
 
     public void setServer(String serString)
     {
-        server = api.getGuildsByName(serString, true).get(0);
+        System.out.println(serString);
+        //System.out.println(api.getGuildsByName(serString, true));
+        //server = api.getGuildsByName(serString, true).get(0);
         users = server.getMembers();
         roles = server.getRoles();
         textChans = server.getTextChannels();

@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
     TextView songName;
     String token;
     String songNameText = " - ";
-    Spinner spinner;
+    Spinner spinner, sp;
     String[] channels;
     static EventChannel eve;
 
@@ -62,45 +62,42 @@ public class HomeFragment extends Fragment {
         token = getLastToken();
 
         //Spinner
-        try {
-            JDA api = JDABuilder.createDefault(token).build();
-            Thread.sleep(1000);
-            if(eve == null)
-                eve = new EventChannel(api);
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(eve == null) {
+            try {
+                JDA api = JDABuilder.createDefault(token).build();
+                Thread.sleep(1000);
+                if (eve == null)
+                    eve = new EventChannel(api);
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         eve.setPoolText("");
 
 
 
-        /*
+
         List<Guild> server = (eve.getServers());
         String[] ser = new String[server.size()];
         for(int i = 0 ; i < server.size() ; i++)
-            ser[i] = server.get(i).toString();
+            ser[i] = server.get(i).getName();
 
-
-        eve.setServer(ser[0]);
-
-
-
-
-        Spinner sp = (Spinner)v.findViewById(R.id.spinnerChannels);
+        sp = (Spinner)v.findViewById(R.id.spinnerChannels);
         ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, server);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp.setAdapter(adapter);
 
-        sp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Button btn2 = (Button) v.findViewById(R.id.button6);
+        btn2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                eve.setServer(parent.getSelectedItem().toString());
+            public void onClick(View v) {
+                eve.setServer(sp.getSelectedItem().toString());
             }
         });
 
-         */
+
 
 
         /*
