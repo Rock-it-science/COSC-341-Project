@@ -52,16 +52,21 @@ public class SlideshowFragment extends Fragment {
     TextView userRole;      //  Displays the role of the selected user
     Spinner spinner;        //  Displays all the names of users
     String[] users;         //  Holds all the names of users on the server
+    String[] userRoles;
+    String roles = "";
+    String user;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
         token = getLastToken();
 
+        //  tv
+        userRole = root.findViewById(R.id.tvRole);
 
         //  Spinner
         users = HomeFragment.getEvent().getMembers();
-        Spinner spinner = root.findViewById(R.id.spinnerUsers);
+        spinner = root.findViewById(R.id.spinnerUsers);
         ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, users);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         spinner.setAdapter(adapter);
@@ -69,7 +74,15 @@ public class SlideshowFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
+                System.out.println("    SELECTED USER = " + users[position]);
+                user = users[position];
+                userRoles = HomeFragment.getEvent().getUserRoles(users[position]);
+                for(int i = 0; i < users.length; i++)
+                {
+                    roles += (userRoles[i]);
+                    if(i != users.length-1) roles += ", ";
+                }
+                userRole.setText(roles);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -90,10 +103,9 @@ public class SlideshowFragment extends Fragment {
         banButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //open warning dialogue or simply just ban the user (whatever is easy).
+                //HomeFragment.getEvent().ban(user);
             }
         });
-
-
 
         //  Kick Button
         banButton = view.findViewById(R.id.buttonBan);
