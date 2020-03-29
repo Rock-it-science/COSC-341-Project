@@ -114,7 +114,7 @@ public class EventChannel {
 
     public void inThePoolWithTheBoys(String msg)
     {
-        TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
+        TextChannel generalChannel = server.getTextChannelsByName("general", true).get(0);
         generalChannel.sendMessage(msg).queue(message -> {
             message.addReaction("1️⃣").queue();
             message.addReaction("2️⃣").queue();
