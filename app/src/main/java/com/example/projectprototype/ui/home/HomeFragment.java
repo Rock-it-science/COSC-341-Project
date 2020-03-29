@@ -60,7 +60,6 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         token = getLastToken();
 
-
         //Spinner
 
         try {
@@ -72,6 +71,9 @@ public class HomeFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        eve.setupServer();
+        System.out.println(("AAAAAAAAAAAAAAAAAAAAAAAAAAAA" + (eve.getMembers().toString())));
+
 
         eve.setPoolText("");
         /*

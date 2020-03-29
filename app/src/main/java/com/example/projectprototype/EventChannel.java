@@ -2,6 +2,7 @@ package com.example.projectprototype;
 import android.util.Log;
 
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Category;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.Member;
@@ -11,18 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.requests.restaction.pagination.ReactionPaginationAction;
+import net.dv8tion.jda.internal.requests.Route;
+
 import com.example.projectprototype.music.musicMain;
+
+import org.w3c.dom.Text;
 
 
 public class EventChannel {
     private final JDA api;
-    private List users;
-    private List roles;
+    private List<Member> users;
+    private List<Role> roles;
     private Guild server;
     private Message poolMessage;
     private musicMain musicPlayer = null;
     private String poolText;
-
+    private List<TextChannel> textChans;
 
     public EventChannel(JDA api) {
         this.api = api;
@@ -30,8 +35,55 @@ public class EventChannel {
         users = server.getMembers();
         roles = server.getRoles();
         poolText = "";
+
+        textChans = server.getTextChannels();
+        for(int i = 0 ; i < textChans.size() ; i++)
+        {
+            if(((TextChannel)textChans.get(i)).getName() == "Roles")
+            {
+                List<Member> member = ((TextChannel) textChans.get(i)).getMembers();
+                for(int j = 0 ; j < member.size() ; j++)
+                {
+                    if(users.contains(member.get(i)))
+                    {
+                        setRole(member.get(i), "member");
+                    }
+                }
+                break;
+            }
+        }
+
     }
 
+    public void setupServer()
+    {
+        boolean has = false;
+        for(TextChannel i : textChans)
+        {
+            if(i.getName().equals("roles"))
+            {
+                has = true;
+                break;
+            }
+        }
+        if(!has)
+            server.createTextChannel("Roles").setParent(textChans.get(0).getParent()).complete();
+
+        has = false;
+
+        for(Role i : roles)
+        {
+            if(i.getName().equals("member"));
+            {
+                has = true;
+                break;
+            }
+        }
+
+        if(!has)
+            server.createRole().setName("member").complete();
+
+    }
 
     public void sendGeneral(String msg) {
         TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
@@ -123,14 +175,16 @@ public class EventChannel {
         return output;
     }
 
-    public List getMembers()
+    public String[] getMembers()
     {
         String[] output = new String[users.size()];
+        System.out.println("THE SIZE OF USERS IS : " + users.size() + "SERVER IS : " + getGuild().getName());
         for(int i = 0; i< users.size() ; i++)
         {
             output[i] = (((Member)users.get(i)).getEffectiveName());
+            System.out.println(output[i]);
         }
-    	return users;
+    	return output;
     }
 
 
