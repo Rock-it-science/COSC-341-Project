@@ -57,13 +57,16 @@ public class SlideshowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
         token = getLastToken();
-        eve = HomeFragment.getEvent();
 
 
         //  Spinner
-        users = eve.getMembers();
-        Spinner spinner = root.findViewById(R.id.spinnerChannels);
-        System.out.println(users[0]);   //   prints pete
+        users = HomeFragment.getEvent().getMembers();
+        Spinner spinner = root.findViewById(R.id.spinnerUsers);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, users);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        spinner.setAdapter(adapter);
+
+
         //ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, users);    //  users isnt null but this thinks it is...
         //adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         //spinner.setAdapter(adapter);
