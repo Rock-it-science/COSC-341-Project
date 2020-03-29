@@ -13,8 +13,8 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="64dp"
-        android:layout_marginBottom="71dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        android:layout_marginBottom="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,11 +40,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="164dp"
+        android:layout_marginBottom="284dp"
         android:text="Run Server Setup"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button6"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="138dp"
+        android:text="UPdate server "
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerChannels" />
 
