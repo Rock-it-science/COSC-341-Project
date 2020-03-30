@@ -76,7 +76,6 @@ public class HomeFragment extends Fragment {
                 JDA api = JDABuilder.create(token, GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL)
                         .setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.EMOTE,CacheFlag.CLIENT_STATUS))
                         .build();
-                Toast.makeText(getContext(), "Connecting to bot", Toast.LENGTH_SHORT).show();
                 api.awaitReady();
                 if (eve == null)
                     eve = new EventChannel(api);

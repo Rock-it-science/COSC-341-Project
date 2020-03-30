@@ -45,10 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
                 //  Save token to local file
                 if (updateTokens(tv.getText().toString()) == 0) {
-                    Toast.makeText(getApplicationContext(), "Token Saved", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Token Saved", Toast.LENGTH_SHORT).show();
                     // Save token to XML (or any other way to save locally)
                 }
                 //  Move on to MainNav activity
+                Toast.makeText(getApplicationContext(), "Connecting to bot", Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(MainActivity.this, MainNav.class);
                 myIntent.putExtra("ser", "0");
                 startActivity(myIntent);
