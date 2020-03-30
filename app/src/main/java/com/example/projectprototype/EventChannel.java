@@ -67,7 +67,8 @@ public class EventChannel {
                 for(int j = 0 ; j < mess.size() ; j++)
                 {
                     System.out.println(users.toString());
-                    if(!users.contains(mess.get(j).getAuthor()))
+                    System.out.println(mess.get(j).getMember().getRoles().contains(server.getRolesByName("baseRole", true)));
+                    if(!mess.get(j).getMember().getRoles().contains(server.getRolesByName("baseRole", false)))
                     {
                         System.out.println(mess.get(j).getAuthor().getName());
                         System.out.println("GOT HERE G");
@@ -169,8 +170,8 @@ public class EventChannel {
 
         Long id = poolMessage.getIdLong();
 
-        TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
-
+        TextChannel generalChannel = server.getTextChannelsByName("general", true).get(0);
+        System.out.println(id);
         poolMessage = generalChannel.retrieveMessageById(id).complete();
 
         if(poolMessage != null)

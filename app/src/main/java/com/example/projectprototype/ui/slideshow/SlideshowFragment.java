@@ -82,6 +82,7 @@ public class SlideshowFragment extends Fragment implements View.OnClickListener 
                 System.out.println("    SELECTED USER = " + users[position]);
                 user = users[position];
                 userRoles = eve.getUserRoles(users[position]);
+                roles = "";
                 if(userRoles.length != 0)
                 {
                     for (int i = 0; i < userRoles.length; i++)
@@ -135,6 +136,7 @@ public class SlideshowFragment extends Fragment implements View.OnClickListener 
                 }else{
                     Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
                 }
+                break;
 
             case R.id.buttonKick:
                 //open warning dialogue or simply just kick the user (whatever is easy).
