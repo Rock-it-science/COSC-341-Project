@@ -1,5 +1,7 @@
 package com.example.projectprototype;
 
+import android.widget.Toast;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
@@ -10,6 +12,7 @@ import net.dv8tion.jda.api.entities.Role;
 import java.util.ArrayList;
 import java.util.List;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.exceptions.HierarchyException;
 import net.dv8tion.jda.api.requests.restaction.pagination.ReactionPaginationAction;
 
 import com.example.projectprototype.music.musicMain;
@@ -231,7 +234,7 @@ public class EventChannel {
     public void setRole(String member, String role)
     {
         System.out.println(member + " =========== " + server.getMembersByEffectiveName(member, false).toString());
-    	server.addRoleToMember(server.getMembersByEffectiveName(member, false).get(0), server.getRolesByName(role, true).get(0)).queue();
+        server.addRoleToMember(server.getMembersByEffectiveName(member, false).get(0), server.getRolesByName(role, true).get(0)).queue();
     }
 
     public void ban(String member, String reason)

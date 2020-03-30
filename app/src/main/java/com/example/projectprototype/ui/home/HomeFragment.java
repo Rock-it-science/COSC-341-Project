@@ -69,28 +69,31 @@ public class HomeFragment extends Fragment {
 
 
         //Spinner
+        String[] ser = {};
         if(eve == null) {
 
             try {
-                JDA api = JDABuilder.create(token, GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.EMOTE,CacheFlag.CLIENT_STATUS)).build();
-                Thread.sleep(1000);
+                JDA api = JDABuilder.create(token, GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL)
+                        .setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.EMOTE,CacheFlag.CLIENT_STATUS))
+                        .build();
+                api.awaitReady();
                 if (eve == null)
                     eve = new EventChannel(api);
                 Thread.sleep(2000);
+
+                server = eve.getServers();
+                ser = new String[server.size()];
+                for(int i = 0 ; i < server.size() ; i++)
+                {
+                    ser[i] =  server.get(i).getName();
+                }
+
+                System.out.println(ser);
             } catch (Exception e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(), "Could not connect to bot", Toast.LENGTH_LONG).show();
             }
         }
-
-
-        server = eve.getServers();
-        String[] ser = new String[server.size()];
-        for(int i = 0 ; i < server.size() ; i++)
-        {
-            ser[i] =  server.get(i).getName();
-        }
-
-        System.out.println(ser);
 
         sp = (Spinner)v.findViewById(R.id.spinnerChannels);
         ArrayAdapter<String> adapter = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, ser);
