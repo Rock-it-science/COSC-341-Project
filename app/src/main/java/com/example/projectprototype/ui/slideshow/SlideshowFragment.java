@@ -50,7 +50,7 @@ public class SlideshowFragment extends Fragment {
     String user;
 
     //  Event Channel
-    static EventChannel eve = HomeFragment.getEvent();
+    //EventChannel eve = HomeFragment.getEvent();
     //  Token
     String token;
     //  Views
@@ -59,6 +59,7 @@ public class SlideshowFragment extends Fragment {
     Spinner spinner;        //  Displays all the names of users
     EditText reasonText;
     CheckBox checkBox;
+    EventChannel eve;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class SlideshowFragment extends Fragment {
 
         //  tv
         userRole = root.findViewById(R.id.tvRole);
+        eve = HomeFragment.getEvent();
 
         //  Spinner
         users = HomeFragment.getEvent().getMembers();
@@ -80,7 +82,7 @@ public class SlideshowFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 System.out.println("    SELECTED USER = " + users[position]);
                 user = users[position];
-                userRoles = HomeFragment.getEvent().getUserRoles(users[position]);
+                userRoles = eve.getUserRoles(users[position]);
                 for(int i = 0; i < users.length; i++)
                 {
                     //roles += (userRoles[i]);
