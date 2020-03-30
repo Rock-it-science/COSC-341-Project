@@ -167,34 +167,23 @@ public class EventChannel {
     public ArrayList<Integer> results5()
     {
 
-        System.out.println(poolMessage.toString());
+        Long id = poolMessage.getIdLong();
+
+        TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
+
+        poolMessage = generalChannel.retrieveMessageById(id).complete();
 
         if(poolMessage != null)
         {
-            System.out.println("BBBBBBBBBBBBBBBBBBBBBB");
 
             ArrayList<Integer> list = new ArrayList<>();
 
-            System.out.println(poolMessage.getReactions().toString());
-
-            for(MessageReaction i : poolMessage.getReactions())
-            {
-                System.out.println(i.toString());
-            }
-
-            ReactionPaginationAction users;
-            //System.out.println(poolMessage.getReactionByUnicode("1️⃣"))
-            users = poolMessage.retrieveReactionUsers("1️⃣");
-            list.add(users.cacheSize());
-            users = poolMessage.retrieveReactionUsers("2️⃣");
-            list.add(users.cacheSize());
-            users = poolMessage.retrieveReactionUsers("3️⃣");
-            list.add(users.cacheSize());
-            users = poolMessage.retrieveReactionUsers("4️⃣");
-            list.add(users.cacheSize());
-            users = poolMessage.retrieveReactionUsers("5️⃣");
-            list.add(users.cacheSize());
-
+            List<MessageReaction> reacts = poolMessage.getReactions();
+            list.add(reacts.get(0).getCount());
+            list.add(reacts.get(1).getCount());
+            list.add(reacts.get(2).getCount());
+            list.add(reacts.get(3).getCount());
+            list.add(reacts.get(4).getCount());
             return list;
         }
 
@@ -251,20 +240,20 @@ public class EventChannel {
 
     public void ban(String member, String reason)
     {
-        server.getMembersByEffectiveName(member,true).get(0).ban(0, reason);
+        server.getMembersByEffectiveName(member,true).get(0).ban(0, reason).complete();
     }
     public void ban(String member)
     {
-        server.getMembersByEffectiveName(member,true).get(0).ban(0);
+        server.getMembersByEffectiveName(member,true).get(0).ban(0).complete();
     }
 
     public void kick(String member)
     {
-        server.getMembersByEffectiveName(member,true).get(0).kick();
+        server.getMembersByEffectiveName(member,true).get(0).kick().complete();
     }
     public void kick(String member, String reason)
     {
-        server.getMembersByEffectiveName(member,true).get(0).kick(reason);
+        server.getMembersByEffectiveName(member,true).get(0).kick(reason).complete();
     }
 
     public String[] getUserRoles(String user)

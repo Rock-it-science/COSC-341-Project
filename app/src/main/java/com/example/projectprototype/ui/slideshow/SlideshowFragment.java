@@ -107,14 +107,14 @@ public class SlideshowFragment extends Fragment {
         checkBox = view.findViewById(R.id.checkBox);
 
         //  Ban Button
-        banButton = view.findViewById(R.id.buttonBan);
-        banButton.setOnClickListener(new View.OnClickListener(){
+        kickButton = view.findViewById(R.id.buttonKick);
+        kickButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 //open warning dialogue or simply just ban the user (whatever is easy).
                 if(checkBox.isChecked()) {
                     if (!reasonText.getText().equals("") || reasonText.getText() != null)
-                        HomeFragment.getEvent().ban(user, reasonText.getText().toString());
-                    else HomeFragment.getEvent().ban(user);
+                        HomeFragment.getEvent().kick(user, reasonText.getText().toString());
+                    else HomeFragment.getEvent().kick(user);
                 }else{
                     Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
                 }
@@ -128,8 +128,8 @@ public class SlideshowFragment extends Fragment {
                 //open warning dialogue or simply just kick the user (whatever is easy).
                 if(checkBox.isChecked()) {
                     if (!reasonText.getText().equals("") || reasonText.getText() != null)
-                        HomeFragment.getEvent().kick(user, reasonText.getText().toString());
-                    else HomeFragment.getEvent().kick(user);
+                        HomeFragment.getEvent().ban(user, reasonText.getText().toString());
+                    else HomeFragment.getEvent().ban(user);
                 }else{
                     Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
                 }

@@ -37,11 +37,18 @@ public class Results extends Fragment {
     {
         ArrayList<Integer> r = e.results5();
 
-        percent[0].setText( r.get(0)+ "%");
-        percent[1].setText( r.get(1)+ "%");
-        percent[2].setText( r.get(2)+ "%");
-        percent[3].setText( r.get(3)+ "%");
-        percent[4].setText( r.get(4)+ "%");
+        int total=0;
+        for(Integer i : r)
+        {
+            total += i-1;
+            System.out.println(i);
+        }
+
+        percent[0].setText( ((float)(r.get(0)-1)/total )*100+ "%");
+        percent[1].setText( ((float)(r.get(1)-1)/total )*100+ "%");
+        percent[2].setText( ((float)(r.get(2)-1)/total )*100+ "%");
+        percent[3].setText( ((float)(r.get(3)-1)/total )*100+ "%");
+        percent[4].setText( ((float)(r.get(4)-1)/total )*100+ "%");
 
     }
 

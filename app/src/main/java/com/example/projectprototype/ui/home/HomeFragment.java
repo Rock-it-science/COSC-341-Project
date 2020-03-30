@@ -73,15 +73,15 @@ public class HomeFragment extends Fragment {
         if(eve == null) {
 
             try {
-                
-                JDA api = JDABuilder.create(token, GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL)
-                        .setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.EMOTE,CacheFlag.CLIENT_STATUS))
+
+                JDA api = JDABuilder.create(token,GatewayIntent.GUILD_BANS,GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_EMOJIS,GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS)
+                        .setEnabledCacheFlags(EnumSet.of(CacheFlag.EMOTE, CacheFlag.ACTIVITY))
+                        .setMemberCachePolicy(MemberCachePolicy.ALL)
+                        .setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.CLIENT_STATUS))
                         .build();
                 api.awaitReady();
 
-                if (eve == null)
-                    eve = new EventChannel(api);
-                Thread.sleep(2000);
+                eve = new EventChannel(api);
 
                 server = eve.getServers();
                 ser = new String[server.size()];
