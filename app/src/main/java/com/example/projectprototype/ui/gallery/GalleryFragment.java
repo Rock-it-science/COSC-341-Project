@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.projectprototype.R;
 import com.example.projectprototype.ui.home.HomeFragment;
+
+import net.dv8tion.jda.api.exceptions.HierarchyException;
 
 public class GalleryFragment extends Fragment {
 
@@ -45,7 +48,11 @@ public class GalleryFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment.getEvent().setRole(sp2.getSelectedItem().toString(), sp1.getSelectedItem().toString());
+                try {
+                    HomeFragment.getEvent().setRole(sp2.getSelectedItem().toString(), sp1.getSelectedItem().toString());
+                } catch (HierarchyException e){
+                    Toast.makeText(getContext(), "Cannot modify a role with higher or equal role to yourself", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
