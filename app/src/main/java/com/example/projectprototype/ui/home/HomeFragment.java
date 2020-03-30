@@ -61,6 +61,16 @@ public class HomeFragment extends Fragment {
         return eve;
     }
 
+    public EventChannel connect(String token) throws LoginException, InterruptedException {
+        JDA api = JDABuilder.create(token,GatewayIntent.GUILD_BANS,GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_EMOJIS,GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS)
+                .setEnabledCacheFlags(EnumSet.of(CacheFlag.EMOTE, CacheFlag.ACTIVITY))
+                .setMemberCachePolicy(MemberCachePolicy.ALL)
+                .setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.CLIENT_STATUS))
+                .build();
+        api.awaitReady();
+        return new EventChannel(api);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -70,31 +80,25 @@ public class HomeFragment extends Fragment {
 
         //Spinner
         String[] ser = {};
-        if(eve == null) {
+        while(eve == null) {
 
             try {
 
-                JDA api = JDABuilder.create(token,GatewayIntent.GUILD_BANS,GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_EMOJIS,GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS)
-                        .setEnabledCacheFlags(EnumSet.of(CacheFlag.EMOTE, CacheFlag.ACTIVITY))
-                        .setMemberCachePolicy(MemberCachePolicy.ALL)
-                        .setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.CLIENT_STATUS))
-                        .build();
-                api.awaitReady();
-
-                eve = new EventChannel(api);
-
-                server = eve.getServers();
-                ser = new String[server.size()];
-                for(int i = 0 ; i < server.size() ; i++)
-                {
-                    ser[i] =  server.get(i).getName();
-                }
+                eve = connect(token);
 
                 System.out.println(ser);
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(getContext(), "Could not connect to bot", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Could not connect to bot, retrying", Toast.LENGTH_LONG).show();
+                eve = null;
             }
+        }
+
+        server = eve.getServers();
+        ser = new String[server.size()];
+        for(int i = 0 ; i < server.size() ; i++)
+        {
+            ser[i] =  server.get(i).getName();
         }
 
         sp = (Spinner)v.findViewById(R.id.spinnerChannels);

@@ -82,12 +82,18 @@ public class SlideshowFragment extends Fragment implements View.OnClickListener 
                 System.out.println("    SELECTED USER = " + users[position]);
                 user = users[position];
                 userRoles = eve.getUserRoles(users[position]);
-                for(int i = 0; i < userRoles.length; i++)
+                if(userRoles.length != 0)
                 {
-                    roles += userRoles[i];
-                    if(i != users.length-1) roles += ", ";
+                    for (int i = 0; i < userRoles.length; i++)
+                    {
+                        roles += userRoles[i];
+                        if (i != userRoles.length - 1) roles += ", ";
+                    }
+                    System.out.println("AAA");
                 }
+                System.out.println("BBB");
                 userRole.setText(roles);
+                System.out.println(roles);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
