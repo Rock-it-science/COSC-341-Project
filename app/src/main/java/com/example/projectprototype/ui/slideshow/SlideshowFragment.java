@@ -41,7 +41,7 @@ import java.io.IOException;
 
 import javax.security.auth.login.LoginException;
 
-public class SlideshowFragment extends Fragment {
+public class SlideshowFragment extends Fragment implements View.OnClickListener {
     private SlideshowViewModel slideshowViewModel;
 
     String[] users;         //  Holds all the names of users on the server
@@ -61,8 +61,7 @@ public class SlideshowFragment extends Fragment {
     CheckBox checkBox;
     EventChannel eve;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
         token = getLastToken();
 
@@ -83,9 +82,9 @@ public class SlideshowFragment extends Fragment {
                 System.out.println("    SELECTED USER = " + users[position]);
                 user = users[position];
                 userRoles = eve.getUserRoles(users[position]);
-                for(int i = 0; i < users.length; i++)
+                for(int i = 0; i < userRoles.length; i++)
                 {
-                    //roles += (userRoles[i]);
+                    roles += userRoles[i];
                     if(i != users.length-1) roles += ", ";
                 }
                 userRole.setText(roles);
@@ -107,34 +106,42 @@ public class SlideshowFragment extends Fragment {
         checkBox = view.findViewById(R.id.checkBox);
 
         //  Ban Button
-        kickButton = view.findViewById(R.id.buttonKick);
-        kickButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                //open warning dialogue or simply just ban the user (whatever is easy).
-                if(checkBox.isChecked()) {
-                    if (!reasonText.getText().equals("") || reasonText.getText() != null)
-                        HomeFragment.getEvent().kick(user, reasonText.getText().toString());
-                    else HomeFragment.getEvent().kick(user);
-                }else{
-                    Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        banButton = view.findViewById(R.id.buttonBan);
+        banButton.setOnClickListener(this);
 
         //  Kick Button
-        banButton = view.findViewById(R.id.buttonBan);
-        banButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                //open warning dialogue or simply just kick the user (whatever is easy).
+        kickButton = view.findViewById(R.id.buttonKick);
+        kickButton.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v){
+        switch(v.getId()){
+            case R.id.buttonBan:
+                //open warning dialogue or simply just ban the user (whatever is easy).
                 if(checkBox.isChecked()) {
-                    if (!reasonText.getText().equals("") || reasonText.getText() != null)
+                    if (!reasonText.getText().equals("") || reasonText.getText() != null) {
+                        Toast.makeText(getContext(), "Banning user", Toast.LENGTH_SHORT).show();
                         HomeFragment.getEvent().ban(user, reasonText.getText().toString());
+                    }
                     else HomeFragment.getEvent().ban(user);
                 }else{
                     Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+
+            case R.id.buttonKick:
+                //open warning dialogue or simply just kick the user (whatever is easy).
+                if(checkBox.isChecked()) {
+                    if (!reasonText.getText().toString().equals("") || reasonText.getText() != null) {
+                        Toast.makeText(getContext(), "Kicking user", Toast.LENGTH_SHORT).show();
+                        HomeFragment.getEvent().kick(user, reasonText.getText().toString());
+                    }
+                    else HomeFragment.getEvent().kick(user);
+                }else{
+                    Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
+                }
+        }
     }
 
     //  returns saved token from token.txt
