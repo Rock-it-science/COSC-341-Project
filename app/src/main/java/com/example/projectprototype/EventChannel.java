@@ -3,6 +3,7 @@ package com.example.projectprototype;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
+import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Guild;
@@ -163,10 +164,20 @@ public class EventChannel {
     public ArrayList<Integer> results5()
     {
 
+        System.out.println(poolMessage.toString());
+
         if(poolMessage != null)
         {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFUCKING KILL ME");
+            System.out.println("BBBBBBBBBBBBBBBBBBBBBB");
+
             ArrayList<Integer> list = new ArrayList<>();
+
+            System.out.println(poolMessage.getReactions().toString());
+
+            for(MessageReaction i : poolMessage.getReactions())
+            {
+                System.out.println(i.toString());
+            }
 
             ReactionPaginationAction users;
             //System.out.println(poolMessage.getReactionByUnicode("1️⃣"))
