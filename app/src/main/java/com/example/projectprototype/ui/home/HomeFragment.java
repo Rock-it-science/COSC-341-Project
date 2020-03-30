@@ -92,6 +92,8 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Could not connect to bot, retrying", Toast.LENGTH_LONG).show();
                 eve = null;
             }
+            if(eve.getServers().toString() == "[]")
+                eve = null;
         }
 
         server = eve.getServers();
