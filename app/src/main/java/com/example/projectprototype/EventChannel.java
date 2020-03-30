@@ -108,7 +108,7 @@ public class EventChannel {
     }
 
     public void sendGeneral(String msg) {
-        TextChannel generalChannel = api.getTextChannelsByName("general", true).get(0);
+        TextChannel generalChannel = server.getTextChannelsByName("general", true).get(0);
         generalChannel.sendMessage(msg).queue();
     }
 
@@ -165,10 +165,11 @@ public class EventChannel {
 
         if(poolMessage != null)
         {
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFUCKING KILL ME");
             ArrayList<Integer> list = new ArrayList<>();
 
             ReactionPaginationAction users;
-
+            //System.out.println(poolMessage.getReactionByUnicode("1️⃣"))
             users = poolMessage.retrieveReactionUsers("1️⃣");
             list.add(users.cacheSize());
             users = poolMessage.retrieveReactionUsers("2️⃣");

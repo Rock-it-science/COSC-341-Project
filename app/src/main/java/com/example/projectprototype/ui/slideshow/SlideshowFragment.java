@@ -83,7 +83,7 @@ public class SlideshowFragment extends Fragment {
                 userRoles = HomeFragment.getEvent().getUserRoles(users[position]);
                 for(int i = 0; i < users.length; i++)
                 {
-                    roles += (userRoles[i]);
+                    //roles += (userRoles[i]);
                     if(i != users.length-1) roles += ", ";
                 }
                 userRole.setText(roles);

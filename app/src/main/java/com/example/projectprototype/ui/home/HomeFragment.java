@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         if(eve == null) {
 
             try {
-                JDA api = JDABuilder.create(token, GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.EMOTE,CacheFlag.CLIENT_STATUS)).build();
+                JDA api = JDABuilder.create(token, GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setDisabledCacheFlags(EnumSet.of(CacheFlag.VOICE_STATE,CacheFlag.ACTIVITY,CacheFlag.EMOTE,CacheFlag.CLIENT_STATUS)).build().awaitReady();
                 Thread.sleep(1000);
                 if (eve == null)
                     eve = new EventChannel(api);
