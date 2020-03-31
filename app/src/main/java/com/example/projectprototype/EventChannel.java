@@ -236,7 +236,7 @@ public class EventChannel {
     public void setRole(String member, String role)
     {
         System.out.println(member + " =========== " + server.getMembersByEffectiveName(member, false).toString());
-        server.addRoleToMember(server.getMembersByEffectiveName(member, false).get(0), server.getRolesByName(role, true).get(0)).queue();
+        server.addRoleToMember(server.getMembersByEffectiveName(member, false).get(0), server.getRolesByName(role, true).get(0)).complete();
     }
 
     public void ban(String member, String reason)
