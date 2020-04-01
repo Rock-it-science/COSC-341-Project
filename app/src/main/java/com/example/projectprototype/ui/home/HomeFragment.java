@@ -1,6 +1,7 @@
 package com.example.projectprototype.ui.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -121,6 +122,17 @@ public class HomeFragment extends Fragment {
 
                 String ser = (sp.getSelectedItem().toString());
                 eve.setServer(ser);
+            }
+        });
+
+        //HELP BUTTON:
+        Button buttonHelp = v.findViewById(R.id.buttonHelp);
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("https://www.writebots.com/discord-bot-token/");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
             }
         });
 
