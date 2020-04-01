@@ -125,17 +125,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //HELP BUTTON:
-        Button buttonHelp = v.findViewById(R.id.buttonHelp);
-        buttonHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uriUrl = Uri.parse("https://www.writebots.com/discord-bot-token/");
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-            }
-        });
-
         return v;
     }
 
