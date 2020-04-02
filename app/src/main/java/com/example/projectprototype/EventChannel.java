@@ -1,7 +1,5 @@
 package com.example.projectprototype;
 
-import android.widget.Toast;
-
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
@@ -13,7 +11,6 @@ import net.dv8tion.jda.api.entities.Role;
 import java.util.ArrayList;
 import java.util.List;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.exceptions.HierarchyException;
 import net.dv8tion.jda.api.requests.restaction.pagination.ReactionPaginationAction;
 
 import com.example.projectprototype.music.musicMain;
@@ -288,7 +285,7 @@ public class EventChannel {
 
 
     //MUSIC COMMANDS
-
+/*
             public void setMusicChannel(String name)
             {
                 VoiceChannel channel = server.getVoiceChannelsByName(name, true).get(0);
@@ -318,6 +315,8 @@ public class EventChannel {
             {
                 musicPlayer = new musicMain(server);
             }
+
+ */
 
 }
 
