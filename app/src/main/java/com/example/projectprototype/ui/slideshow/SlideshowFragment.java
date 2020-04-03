@@ -130,9 +130,21 @@ public class SlideshowFragment extends Fragment implements View.OnClickListener 
                 if(checkBox.isChecked()) {
                     if (!reasonText.getText().equals("") || reasonText.getText() != null) {
                         Toast.makeText(getContext(), "Banning user", Toast.LENGTH_SHORT).show();
-                        HomeFragment.getEvent().ban(user, reasonText.getText().toString());
+                        try {
+                            HomeFragment.getEvent().ban(user, reasonText.getText().toString());
+                        }
+                        catch(Exception e)
+                        {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else HomeFragment.getEvent().ban(user);
+                    else {
+                        try {
+                            HomeFragment.getEvent().ban(user);
+                        } catch (Exception e){
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();}
+                    }
+
                 }else{
                     Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
                 }
@@ -141,11 +153,15 @@ public class SlideshowFragment extends Fragment implements View.OnClickListener 
             case R.id.buttonKick:
                 //open warning dialogue or simply just kick the user (whatever is easy).
                 if(checkBox.isChecked()) {
-                    if (!reasonText.getText().toString().equals("") || reasonText.getText() != null) {
-                        Toast.makeText(getContext(), "Kicking user", Toast.LENGTH_SHORT).show();
-                        HomeFragment.getEvent().kick(user, reasonText.getText().toString());
+                    try {
+
+                        if (!reasonText.getText().toString().equals("") || reasonText.getText() != null) {
+                            Toast.makeText(getContext(), "Kicking user", Toast.LENGTH_SHORT).show();
+                            HomeFragment.getEvent().kick(user, reasonText.getText().toString());
+                        } else HomeFragment.getEvent().kick(user);
                     }
-                    else HomeFragment.getEvent().kick(user);
+                    catch(Exception e)
+                    { Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();}
                 }else{
                     Toast.makeText(getContext(), "Check the confirmation notice", Toast.LENGTH_SHORT).show();
                 }
